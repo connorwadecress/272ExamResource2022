@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Question2";
+}
+<!--------------------------------------Dont Touch This--------------------------------------->
+<style>
+    body{
+        background-color:black;
+        color:white
+    }
+</style>
+<br />
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <form class="from-horizontal text-dark">
+                    <div class="fom-group">
+                        <label style="color:black">Playlist Name</label>
+                        <input class="form-control" type="text" id="playlist" />
+                    </div>
+                    <br />
+                    <button class="btn" style="border-radius:20px;background-color:#009c9e" id="btnAdd" type="button">
+                        Add Playlist
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--------------------------------------Dont Touch This--------------------------------------->
+
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        //------------- Question 2--------------------\\
+        /******Start Question 2 ********/
+        $("#btnAdd").on('click', function () {
+            $.ajax({
+                type: "POST",
+                url: "/SectionA/Question2/",
+                data: JSON.stringify({ playlist: $('#playlist').val() }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    console.log(response);
+                    if (response.message == true) {
+                        alert("Successfully Added " + $("#playlist").val() + " to the System");
+                        $("#playlist").val("");
+                    }
+                    else {
+                        alert("Something Went Wrong, Please Try Again");
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+        //-------------------------------------\\
+    </script>
+}
+
